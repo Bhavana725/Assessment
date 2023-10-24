@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Measurement Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <h2>Cooking Measurement Calculator</h2>
+        <label for="value">Enter Value:</label>
+        <input type="number" id="value" step="0.01">
+        
+        <label for="from">From:</label>
+        <select id="from">
+            <option value="teaspoon">Teaspoon</option>
+            <option value="tablespoon">Tablespoon</option>
+            <option value="cup">Cup</option>
+        </select>
+
+        <label for="to">To:</label>
+        <select id="to">
+            <option value="teaspoon">Teaspoon</option>
+            <option value="tablespoon">Tablespoon</option>
+            <option value="cup">Cup</option>
+        </select>
+
+        <button onclick="convert()">Convert</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convert() {
+            const value = parseFloat(document.getElementById("value").value);
+            const fromUnit = document.getElementById("from").value;
+            const toUnit = document.getElementById("to").value;
+
+            // Conversion factors for various cooking measurements
+            const conversionFactors = {
+                teaspoon: {
+                    tablespoon: 0.333,
+                    cup: 0.0208,
+                },
+                tablespoon: {
+                    teaspoon: 3,
+                    cup: 0.0625,
+                },
+                cup: {
+                    teaspoon: 48,
+                    tablespoon: 16,
+                },
+            };
+
+            const result = value * conversionFactors[fromUnit][toUnit];
+            document.getElementById("result").textContent = `${value} ${fromUnit} is equal to ${result} ${toUnit}`;
+        }
+    </script>
+</body>
+</html>
